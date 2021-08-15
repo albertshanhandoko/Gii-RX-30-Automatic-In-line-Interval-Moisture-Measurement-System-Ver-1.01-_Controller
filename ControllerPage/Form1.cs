@@ -451,7 +451,7 @@ namespace ControllerPage
             bool check_result = false;
             try
             {
-                mySerialPort.ReadTimeout = 5 * 1000;// in miliseconds
+                mySerialPort.ReadTimeout = 10 * 1000;// in miliseconds
                 bool check_start = true;
                 string readStr = string.Empty;
                 byte[] readBuffer = new byte[mySerialPort.ReadBufferSize];
@@ -460,12 +460,13 @@ namespace ControllerPage
                 readBuffer = new byte[mySerialPort.ReadBufferSize];
                 readLen = mySerialPort.Read(readBuffer, 0, readBuffer.Length);
                 readStr = Encoding.UTF8.GetString(readBuffer, 0, readLen);
+                mySerialPort.DiscardInBuffer();
+                mySerialPort.DiscardOutBuffer();
 
                 int check_counter = 0;
 
                 while (check_start == true && check_counter <= 5)
                 {
-                    Console.WriteLine("whilenya mulai gan", application_name);
                     Thread.Sleep(2000);// this solves the problem
                     readBuffer = new byte[mySerialPort.ReadBufferSize];
                     readLen = mySerialPort.Read(readBuffer, 0, readBuffer.Length);
@@ -1368,7 +1369,7 @@ namespace ControllerPage
 
                 Thread.Sleep(10000);
 
-                MessageBox.Show(this, "Error 011 - no message during checking for 5 mins");
+                MessageBox.Show(this, "Error 011 - No message return during checking");
 
                 checkcommand = false;
                 //Console.WriteLine("Check Thread Aborted");
