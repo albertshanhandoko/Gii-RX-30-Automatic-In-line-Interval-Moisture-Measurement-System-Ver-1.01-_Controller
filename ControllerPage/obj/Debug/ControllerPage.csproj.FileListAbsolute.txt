@@ -320,7 +320,6 @@ D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_C
 D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_ComfilePI\ControllerPage\bin\Debug\System.Buffers.xml
 D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_ComfilePI\ControllerPage\bin\Debug\System.Memory.xml
 D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_ComfilePI\ControllerPage\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_ComfilePI\ControllerPage\obj\Debug\ControllerPage.csprojAssemblyReference.cache
 D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_ComfilePI\ControllerPage\obj\Debug\ControllerPage.Form1.resources
 D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_ComfilePI\ControllerPage\obj\Debug\ControllerPage.Form2.resources
 D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_ComfilePI\ControllerPage\obj\Debug\ControllerPage.Form2_old.resources
@@ -345,3 +344,6 @@ D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_C
 D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_ComfilePI\ControllerPage\obj\Debug\ControllerPage.csproj.CopyComplete
 D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_ComfilePI\ControllerPage\obj\Debug\ControllerPage.exe
 D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_ComfilePI\ControllerPage\obj\Debug\ControllerPage.pdb
+D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_ComfilePI\ControllerPage\obj\Debug\ControllerPage.FormMode.resources
+D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_ComfilePI\ControllerPage\obj\Debug\ControllerPage.FormInterface.resources
+D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_ComfilePI\ControllerPage\obj\Debug\ControllerPage.csprojAssemblyReference.cache

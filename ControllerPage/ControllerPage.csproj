@@ -169,6 +169,12 @@
     <Compile Include="FormBIASPassword.designer.cs">
       <DependentUpon>FormBIASPassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormMode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMode.Designer.cs">
+      <DependentUpon>FormMode.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormIPSet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +186,12 @@
     </Compile>
     <Compile Include="FormLanguage.designer.cs">
       <DependentUpon>FormLanguage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormInterface.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormInterface.Designer.cs">
+      <DependentUpon>FormInterface.cs</DependentUpon>
     </Compile>
     <Compile Include="FormNumberinterval.cs">
       <SubType>Form</SubType>
@@ -270,11 +282,17 @@
     <EmbeddedResource Include="FormBIASPassword.resx">
       <DependentUpon>FormBIASPassword.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormMode.resx">
+      <DependentUpon>FormMode.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormIPSet.resx">
       <DependentUpon>FormIPSet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLanguage.resx">
       <DependentUpon>FormLanguage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormInterface.resx">
+      <DependentUpon>FormInterface.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormNumberinterval.resx">
       <DependentUpon>FormNumberinterval.cs</DependentUpon>

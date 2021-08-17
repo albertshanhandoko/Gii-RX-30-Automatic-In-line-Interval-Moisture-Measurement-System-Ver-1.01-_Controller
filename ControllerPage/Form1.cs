@@ -43,7 +43,6 @@ namespace ControllerPage
         //System.Windows.Forms.Timer MyTimer = new System.Windows.Forms.Timer();
         System.Timers.Timer MyTimer = new System.Timers.Timer();
         System.Timers.Timer Timer_5min_StopCheck = new System.Timers.Timer();
-        System.Timers.Timer Timer_5min_StopRunning = new System.Timers.Timer();
 
         public Thread check_thread;
         public Thread checktemp_thread;
@@ -91,6 +90,9 @@ namespace ControllerPage
         public Form1()
         {
             InitializeComponent();
+            MyTimer.Elapsed += new ElapsedEventHandler(MyTimer_Tick);
+            MyTimer.Interval = (1000);
+            
             data_initiation_input();
 
         }
@@ -167,7 +169,7 @@ namespace ControllerPage
         }
         private void button_Time_Click(object sender, EventArgs e)
         {
-            if (Combobox_Mode.SelectedItem.ToString().ToLower() == "fix time" && Combobox_Mode.SelectedIndex > -1)
+            if (Button_Mode.Text.ToLower() == "fixed time")
             {
 
                 using (var form = new FormFixedTime())
@@ -211,74 +213,60 @@ namespace ControllerPage
             Sensor_input_Helper.Command_Stop(mySerialPort);
             bool_stop_click = true;
             MyTimer.Enabled = false;
-            MyTimer.Stop();
+            //MyTimer.Stop();
         }
         private void Btn_Check_Click(object sender, EventArgs e)
         {
-            data_initiation_input();
-            if (Combobox_ComPort.SelectedIndex > -1)
+            if (Button_Interface.Text != "RS-232" && Button_Interface.Text != "RS-485")
             {
-                if (Combobox_ComPort.SelectedItem.ToString() == "RS-232")
-                {
-                    mySerialPort = new SerialPort("/dev/ttyAMA0"); //232
-                }
-                else if (Combobox_ComPort.SelectedItem.ToString() == "RS-485")
-                {
-                    mySerialPort = new SerialPort("/dev/ttyS0"); //485
-                }
-                else
-                {
-                    mySerialPort = new SerialPort(Combobox_ComPort.Text);
-                }
+                MessageBox.Show("Please Pick Interface " + Button_Interface.Text, application_name);
             }
             else
             {
-                mySerialPort = new SerialPort("/dev/ttyS0"); //485
-            }
-            // pas check 10 detik aja
-            //mySerialPort.ReadTimeout = 20 * 1000;// in miliseconds
-
-            //mySerialPort.ReadBufferSize = 2000000;
-            //mySerialPort = new SerialPort("/dev/ttyAMA0"); //232
-            if (!mySerialPort.IsOpen)
-            {
-                SensorHelper_2.OpenCon_Port(mySerialPort, 1200);
-                Thread.Sleep(30);
-
-            }
-
-            else
-            {
-                mySerialPort.Close();
-                Thread.Sleep(100);
-                SensorHelper_2.OpenCon_Port(mySerialPort, 1200);
-                Thread.Sleep(30);
-
-            }
-            try
-            {
+                data_initiation_input();
                 
-                bool check_connect_result;
-                check_connect_result = check_connection_sensor();
-                //check_connect_result = true;
 
-                if (check_connect_result)
+                #region Reset Sensor Connection
+                if (!mySerialPort.IsOpen)
                 {
-                    check_thread = new Thread(Check_Thread);
-                    check_thread.Start();
-
+                    SensorHelper_2.OpenCon_Port(mySerialPort, 1200);
+                    Thread.Sleep(30);
                 }
                 else
                 {
-                    Console.Write("Error 101, else");
+                    mySerialPort.Close();
+                    Thread.Sleep(100);
+                    SensorHelper_2.OpenCon_Port(mySerialPort, 1200);
+                    Thread.Sleep(30);
+                }
+                #endregion
+                try
+                {
+                
+                    bool check_connect_result;
+                    check_connect_result = check_connection_sensor();
+                    //check_connect_result = true;
+
+                    if (check_connect_result)
+                    {
+                        check_thread = new Thread(Check_Thread);
+                        check_thread.Start();
+
+                    }
+                    else
+                    {
+                        Console.Write("Error 101, else");
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error 001 - Connection to sensor failed");
+                    Console.WriteLine(ex.Message);
                 }
 
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error 001 - Connection to sensor failed");
-                Console.WriteLine(ex.Message);
-            }
+
         }
         private void button_start_Click(object sender, EventArgs e)
         {
@@ -350,8 +338,7 @@ namespace ControllerPage
                 }
 
                 Thread.Sleep(500);
-                timer_counter = 1;
-
+                
                 batch_id = Sensor_input_Helper.MySql_Insert_Batch(Sensor_input_Helper.GetLocalIPAddress()
                     , ButtonProduct.Text
                     , TotalInterval
@@ -382,14 +369,15 @@ namespace ControllerPage
                 Btn_CheckTemp.Enabled = false;
                 Btn_Check.Enabled = false;
 
-                Combobox_Mode.Enabled = false;
-                Combobox_Mode.Enabled = false;
+
+                Button_Mode.Enabled = false;
+                
                 textBox_Sensor_Status.Text = "Running";
                 // check during start
                 mySerialPort.ReadTimeout = 60 * 1000 * 5;// in miliseconds
 
                 Thread readThread;
-                if (Combobox_Mode.SelectedItem.ToString().ToLower() == "fix time")
+                if (Button_Mode.Text.ToLower() == "fixed time")
                 {
                     FixedTime_start = DateTime.Now;
                     fixed_time_timer_stop = true;
@@ -399,7 +387,7 @@ namespace ControllerPage
                     //readThread = new Thread(Read_FixedTime);
                     //readThread.Start();
                 }
-                else if (Combobox_Mode.SelectedItem.ToString().ToLower() == "fix pieces")
+                else if (Button_Mode.Text.ToLower() == "fixed pieces")
                 {
                     //readThread = new Thread(Read_FixedPieces);
                     //readThread.Start();
@@ -408,7 +396,7 @@ namespace ControllerPage
                     start_thread.Start();
 
                 }
-                else if (Combobox_Mode.SelectedItem.ToString().ToLower() == "interval")
+                else if (Button_Mode.Text.ToLower() == "interval")
                 {
                     //readThread = new Thread(Read_Interval);
                     //readThread.Start();
@@ -495,54 +483,10 @@ namespace ControllerPage
             return check_result;
         }
 
-        private void Combobox_Mode_SelectedIndexChanged(object sender, EventArgs e)
+        private void Button_Mode_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            if (Combobox_Mode.SelectedIndex <= -1)
-            {
-                Console.WriteLine("initial condition");
-                //buttonOK.Enabled = true;
-            }
-            else if (Combobox_Mode.SelectedItem.ToString().ToLower() == "fix time" && Combobox_Mode.SelectedIndex > -1)
-            {
 
-                Console.WriteLine("Time mode");
-                ButtonProduct.Enabled = true;
-                ButtonNumInterval.Enabled = false;
-                ButtonNumInterval.Text = string.Empty;
-                ButtonNumPcs.Enabled = false;
-                ButtonNumPcs.Text = string.Empty;
-                ButtonWaitingTime.Enabled = true;
-                ButtonWaitingTime.Text = string.Empty;
-                textBox9.Text = "Running Time";
-
-            }
-            else if (Combobox_Mode.SelectedItem.ToString().ToLower() == "fix pieces" && Combobox_Mode.SelectedIndex > -1)
-            {
-
-                Console.WriteLine("Time mode");
-                ButtonProduct.Enabled = true;
-                ButtonNumInterval.Enabled = false;
-                ButtonNumInterval.Text = string.Empty;
-                ButtonNumPcs.Enabled = true;
-                //ButtonNumPcs.Text = string.Empty;
-                ButtonWaitingTime.Enabled = false;
-                ButtonWaitingTime.Text = string.Empty;
-
-            }
-
-            else
-            {
-                ButtonProduct.Enabled = true;
-                ButtonNumInterval.Enabled = true;
-                ButtonNumPcs.Enabled = true;
-                ButtonWaitingTime.Enabled = true;
-                ButtonWaitingTime.Text = string.Empty;
-                textBox9.Text = "Int. Waiting Time";
-
-                Console.WriteLine("Pieces mode");
-
-            }
         }
         private void data_cleansing()
         {
@@ -567,8 +511,9 @@ namespace ControllerPage
             ResultGrain = null;
             ResultMeasure = null;
             temp_cond = false;
-            //System.Windows.Forms.Timer MyTimer = new System.Windows.Forms.Timer();
-            System.Timers.Timer MyTimer = new System.Timers.Timer();
+            //MyTimer = 
+            // selalu pake Sytem.Timers.Timer
+
             thereshold_param = false;
             blink_timer = 0;
 
@@ -603,20 +548,14 @@ namespace ControllerPage
 
             ButtonIPSet.Text = Sensor_input_Helper.GetLocalIPAddress().Last().ToString() ;
             // Comport
-            Combobox_ComPort.Items.Clear();
+            //Button_Interface.Text = "INTERFACE";
 
-            //Combobox_ComPort.Items.Add("COM2");
-            Combobox_ComPort.Items.Add("RS-232");
-            Combobox_ComPort.Items.Add("RS-485");
+            //Button_Interface.Items.Add("COM2");
 
             // Controller Mode
-            Combobox_Mode.Items.Clear();
-            Combobox_Mode.Items.Add("Interval");
-            Combobox_Mode.Items.Add("Fix Time");
-            Combobox_Mode.Items.Add("Fix Pieces");
-
+            Button_Mode.Text = "MODE";
             // Mode cannot be clicked
-            Combobox_Mode.Enabled = false;
+            Button_Mode.Enabled = false;
 
             // at the start button cannot be clicked
             ButtonProduct.Enabled = false;
@@ -634,64 +573,15 @@ namespace ControllerPage
             textBox_Sensor_Status.Text = "Offline";
 
             // TImer
-            MyTimer.Elapsed += new ElapsedEventHandler(MyTimer_Tick);
-            MyTimer.Interval = (2000);
+            
 
             Timer_5min_StopCheck.Elapsed += new ElapsedEventHandler(MyTimer_CheckStop_Tick);
             Timer_5min_StopCheck.Interval = (60000); // testing
             List_Error_code = Sensor_input_Helper.get_List_Error_Code();
 
-            textBox_sensornumber.Text = "SENSOR " + (Sensor_input_Helper.GetLocalIPAddress()).Last().ToString();
+            //textBox_sensornumber.Text = "SENSOR " + (Sensor_input_Helper.GetLocalIPAddress()).Last().ToString();
 
-
-
-            //
-            string str1 = "1234";
-            char[] array1 = str1.ToCharArray();
-            string final1 = "";
-            foreach (var i in array1)
-            {
-                string hex1 = String.Format("{0:X}", Convert.ToInt32(i));
-                final1 += hex1.Insert(0, "0X") + " ";
-            }
-            final1 = final1.TrimEnd();
-            Console.WriteLine(final1);
-
-            //
-            //string checksum = Measure.Substring(5, 2);
-            //string test_measure = "125";
-            //string checksum = "98";
-
-            string test_measure = "129";
-            string checksum = "98";
-
-
-            Console.WriteLine("Checksum adalah: ", checksum);
-            //string str = "123";
-            char[] array = test_measure.ToCharArray();
-            string final = "";
-            //BigInteger x = 0;
-            int checksum_measure = 0;
-            //BigInteger checksum_measure = 0;
-
-
-            foreach (var i in array)
-            {
-                string hex = String.Format("{0:X}", Convert.ToInt32(i));
-                //final += hex.Insert(0, "0X") + " ";
-                //final = hex.Insert(0, "0X") + " ";
-                //final += hex;
-                //checksum_measure = checksum_measure + BigInteger.Parse(final, NumberStyles.HexNumber);
-                //checksum_measure = checksum_measure + Convert.ToInt32(hex, 16);
-                checksum_measure = checksum_measure + Convert.ToInt32(hex);
-
-
-            }
-            Console.WriteLine("checksum measure adalah: " + checksum_measure.ToString());
-            if (checksum_measure == Convert.ToInt32(checksum))
-            {
-                Console.WriteLine("uouo");
-            }
+            label_ipaddress.Text = "SENSOR " + (Sensor_input_Helper.GetLocalIPAddress()).Last().ToString();
 
 
         }
@@ -699,13 +589,13 @@ namespace ControllerPage
         private bool Start_Validation()
         {
             bool isvalid = false;
-            if (Combobox_Mode.SelectedIndex < 0)
+            if (Button_Mode.Text.ToLower() == "mode")
             {
                 MessageBox.Show("PLease Enter Controller Mode", application_name);
                 isvalid = false;
             }
 
-            else if (Combobox_Mode.SelectedItem.ToString().ToLower() == "fix time" && Combobox_Mode.SelectedIndex >= 0)
+            else if (Button_Mode.Text.ToLower() == "fixed time")
             {
                 if (ButtonProduct.Text == "")
                 {
@@ -737,7 +627,7 @@ namespace ControllerPage
                 }
 
             }
-            else if (Combobox_Mode.SelectedItem.ToString().ToLower() == "interval" && Combobox_Mode.SelectedIndex >= 0)
+            else if (Button_Mode.Text.ToLower() == "interval")
             {
                 if (ButtonProduct.Text == "")
                 {
@@ -780,7 +670,7 @@ namespace ControllerPage
                 }
 
             }
-            else if (Combobox_Mode.SelectedItem.ToString().ToLower() == "fix pieces" && Combobox_Mode.SelectedIndex >= 0)
+            else if (Button_Mode.Text.ToLower() == "fixed pieces")
             {
                 if (ButtonProduct.Text == "")
                 {
@@ -932,12 +822,12 @@ namespace ControllerPage
         private void next_action_button(bool bool_check_error_next)
         {
 
-            MyTimer.Enabled = false;
-            MyTimer.Stop();
-
+            
             if (!bool_check_error_next)
             {
                 // klo ga error
+                MyTimer.Enabled = false;
+                //MyTimer.Stop();
 
                 Btn_Start.Invoke((Action)delegate
                 {
@@ -949,10 +839,10 @@ namespace ControllerPage
                     //Curr_Kernel_TextBox.Text = (counter_data + 1).ToString();
                     Btn_Stop.Enabled = true;
                 });
-                Combobox_Mode.Invoke((Action)delegate
+                Button_Mode.Invoke((Action)delegate
                 {
                     //Curr_Kernel_TextBox.Text = (counter_data + 1).ToString();
-                    Combobox_Mode.Enabled = true;
+                    Button_Mode.Enabled = true;
                 });
                 Btn_CheckTemp.Invoke((Action)delegate
                 {
@@ -964,15 +854,15 @@ namespace ControllerPage
                     //Curr_Kernel_TextBox.Text = (counter_data + 1).ToString();
                     Btn_Check.Enabled = true;
                 });
-                Combobox_Mode.Invoke((Action)delegate
+                Button_Mode.Invoke((Action)delegate
                 {
                     //Curr_Kernel_TextBox.Text = (counter_data + 1).ToString();
-                    Combobox_Mode.Enabled = true;
+                    Button_Mode.Enabled = true;
                 });
-                Combobox_ComPort.Invoke((Action)delegate
+                Button_Interface.Invoke((Action)delegate
                 {
                     //Curr_Kernel_TextBox.Text = (counter_data + 1).ToString();
-                    Combobox_ComPort.Enabled = true;
+                    Button_Interface.Enabled = true;
                 });
                 textBox_Sensor_Status.Invoke((Action)delegate
                 {
@@ -998,10 +888,10 @@ namespace ControllerPage
                 {
                     Btn_Stop.Enabled = false;
                 });
-                Combobox_Mode.Invoke((Action)delegate
+                Button_Mode.Invoke((Action)delegate
                 {
                     //Curr_Kernel_TextBox.Text = (counter_data + 1).ToString();
-                    Combobox_Mode.Enabled = false;
+                    Button_Mode.Enabled = false;
                 });
                 Btn_CheckTemp.Invoke((Action)delegate
                 {
@@ -1170,12 +1060,13 @@ namespace ControllerPage
             {
                 Curr_Measure_TextBox.Invoke((Action)delegate
                 {
-                    Curr_Measure_TextBox.Text = "";
+                    Curr_Measure_TextBox.Text = string.Empty;
+                   //Curr_Measure_TextBox.Text = " J " + "." + " J ";
                 });
             }
             blink_timer = blink_timer + 1;
 
-            //Console.WriteLine("blink_timer adalah: ", blink_timer.ToString());
+            //Console.WriteLine("blink_timer adalah: "+ blink_timer.ToString() + " & %2 adalah: " + (blink_timer % 2) .ToString());
             TimeSpan Calibrate = TimeSpan.FromSeconds(20);
             TimeSpan Time_Dif_Timer = DateTime.Now - FixedTime_start;
 
@@ -1185,6 +1076,7 @@ namespace ControllerPage
 
                 )
             {
+                Console.WriteLine("fixed_time_timer_stop adalah: ", fixed_time_timer_stop.ToString());
                 fixed_time_timer_stop = false;
                 Sensor_input_Helper.Command_Stop(mySerialPort);
                 Thread.Sleep(2000);
@@ -1204,7 +1096,7 @@ namespace ControllerPage
             {
                 try
                 {
-                    Thread.Sleep(4000);// this solves the problem
+                    Thread.Sleep(3000);// this solves the problem
                     byte[] readBuffer = new byte[mySerialPort.ReadBufferSize];
                     int readLen = mySerialPort.Read(readBuffer, 0, readBuffer.Length);
                     string readStr = string.Empty;
@@ -1347,7 +1239,7 @@ namespace ControllerPage
                     }
                     else if (Result_Parsing == "00090")
                     {
-                        Thread.Sleep(10000);
+                        Thread.Sleep(8000);
                         Console.WriteLine("Sensor Normal");
                         MessageBox.Show(this, "Connection Succeed");
                         checkcommand = false;
@@ -1412,18 +1304,12 @@ namespace ControllerPage
                     start_next_cond = true;
                     Measure_Cond = true;
                     countingbatch = true;
-                    if (timer_counter == 1)
-                    {
-                        MyTimer.Enabled = true;
-                        MyTimer.Start();
-
-                        timer_counter = 0;
-                        Console.WriteLine("MyTimerStart");
-                    }
-
+                    Thread.Sleep(3000);
+                    MyTimer.Enabled = true;
+                    //MyTimer.Start();
+                    Console.WriteLine("Start Timer");
                     #region Collect Measurement Value
 
-                    Thread.Sleep(3000);
                     while (Measure_Cond == true)
                     {
                         Thread.Sleep(1000);// this solves the problem
@@ -1550,7 +1436,7 @@ namespace ControllerPage
                                     }
                                     else
                                     {
-                                        Console.WriteLine("R-nya isinya trash");
+                                        Console.WriteLine("R");
                                     }
 
 
@@ -1616,7 +1502,7 @@ namespace ControllerPage
                                 )
                             {
                                 MyTimer.Enabled = false;
-                                MyTimer.Stop();
+                                //MyTimer.Stop();
 
                                 AllText = GetWords(Result_Parsing);
                                 int checkindex;
@@ -1645,7 +1531,8 @@ namespace ControllerPage
                                 Curr_Measure_TextBox.Invoke((Action)delegate
                                 {
                                     //Curr_Measure_TextBox.Text = Result_Parsing.Format("0.0");
-                                    Curr_Measure_TextBox.Text = string.Format("{0:F1}", Result_Parsing);
+                                    Curr_Measure_TextBox.Text = string.Format("{0:F1}", Result_Parsing) + "%";
+                                    
                                 });
 
                                 total_average = 0;
@@ -1661,11 +1548,6 @@ namespace ControllerPage
                                     //Final Average
                                 });
 
-                                Textbox_Forever.Invoke((Action)delegate
-                                {
-                                    //Curr_Kernel_TextBox.Text = (counter_data + 1).ToString();
-                                    Textbox_Forever.Text = forever_str;
-                                });
 
                                 //loat Result_Parsing_input = float.Parse(Result_Parsing);
                                 Sensor_input_Helper.MySql_Insert_Measure(batch_id, 1000 + current_interval + 1
@@ -1734,7 +1616,6 @@ namespace ControllerPage
 
                         start_next_cond = false;
                         blink_timer = 1;
-                        timer_counter = 1;
                         counter_data_reset = 0;
                         readStr = string.Empty;
 
@@ -1799,25 +1680,18 @@ namespace ControllerPage
 
                 try
                 {
+
                     readStr = string.Empty;
                     aggregate_cond = true;
                     start_next_cond = true;
                     Measure_Cond = true;
                     countingbatch = true;
-                    if (timer_counter == 1)
-                    {
-                        //MyTimer.Elapsed += new ElapsedEventHandler(MyTimer_Tick);
-                        //MyTimer.Interval = (2000); // 45 mins
-                        MyTimer.Enabled = true;
-                        MyTimer.Start();
-
-                        timer_counter = 0;
-                        Console.WriteLine("MyTimerStart");
-                    }
+                    Thread.Sleep(3000);
+                    MyTimer.Enabled = true;
+                    //MyTimer.Start();
 
                     #region Collect Measurement Value
 
-                    Thread.Sleep(3000);
                     while (Measure_Cond == true)
                     {
 
@@ -1862,7 +1736,7 @@ namespace ControllerPage
                                             countingbatch = false;
                                             bool_check_error = true;
                                             MyTimer.Enabled = false;
-                                            MyTimer.Stop();
+                                            //MyTimer.Stop();
                                             Console.WriteLine("Timer Stop");
                                         }
                                         // FInsih check error
@@ -1904,7 +1778,6 @@ namespace ControllerPage
                                 Console.WriteLine("Next measurement Fixed Time");
                                 //start_next_cond = false;
                                 blink_timer = 1;
-                                timer_counter = 1;
                                 //counter_data_reset = 0;
                                 readStr = string.Empty;
                             }
@@ -1930,7 +1803,7 @@ namespace ControllerPage
                             Console.WriteLine("DateTime Now & FixedTime_Start: " + DateTime.Now.ToString() + " & " + FixedTime_start.ToString());
                             Console.WriteLine("Time Dif Total second & Running Time Fixed adalah: " + Time_Dif.TotalSeconds.ToString() + " & " + running_time_fixed.ToString());
                             MyTimer.Enabled = false;
-                            MyTimer.Stop();
+                            //MyTimer.Stop();
 
                             if (!bool_stop_click)
                             {
@@ -2054,7 +1927,7 @@ namespace ControllerPage
                                         Curr_Measure_TextBox.Invoke((Action)delegate
                                         {
                                             //Curr_Measure_TextBox.Text = Result_Parsing.Format("0.0");
-                                            Curr_Measure_TextBox.Text = string.Format("{0:F1}", Result_Parsing);
+                                            Curr_Measure_TextBox.Text = string.Format("{0:F1}", Result_Parsing) + "%";
                                         });
 
                                         total_average = 0;
@@ -2092,7 +1965,7 @@ namespace ControllerPage
 
                                         Curr_Measure_TextBox.Invoke((Action)delegate
                                         {
-                                            Curr_Measure_TextBox.Text = Result_Parsing;
+                                            Curr_Measure_TextBox.Text = Result_Parsing + "%";
                                         });
 
                                         Current_Avg_TextBox.Invoke((Action)delegate
@@ -2146,7 +2019,6 @@ namespace ControllerPage
                         current_interval++;
 
                         blink_timer = 1;
-                        timer_counter = 1;
                         readStr = string.Empty;
                     }
                     #endregion
@@ -2158,7 +2030,7 @@ namespace ControllerPage
 
 
                     MyTimer.Enabled = false;
-                    MyTimer.Stop();
+                    //MyTimer.Stop();
                     //mySerialPort.DiscardInBuffer();
                     //mySerialPort.DiscardOutBuffer();
                     stat_continue = false;
@@ -2215,22 +2087,16 @@ namespace ControllerPage
                     start_next_cond = true;
                     Measure_Cond = true;
                     countingbatch = true;
-                    if (timer_counter == 1)
-                    {
-                        MyTimer.Elapsed += new ElapsedEventHandler(MyTimer_Tick);
-                        MyTimer.Interval = (2000); // 45 mins
-                        MyTimer.Enabled = true;
-                        MyTimer.Start();
-
-                        timer_counter = 0;
-                    }
+                    Thread.Sleep(3000);
+                    MyTimer.Enabled = true;
+                    //MyTimer.Start();
+                    Console.WriteLine("MyTimer Start");
 
                     #region Collect Measurement Value
 
-                    Thread.Sleep(3000);
                     while (Measure_Cond == true)
                     {
-                        Thread.Sleep(2000);// this solves the problem
+                        Thread.Sleep(1500);// this solves the problem
                         readBuffer = new byte[mySerialPort.ReadBufferSize];
                         readLen = mySerialPort.Read(readBuffer, 0, readBuffer.Length);
                         //string readStr = string.Empty;
@@ -2462,7 +2328,7 @@ namespace ControllerPage
                                 Curr_Measure_TextBox.Invoke((Action)delegate
                                 {
                                     //Curr_Measure_TextBox.Text = Result_Parsing.Format("0.0");
-                                    Curr_Measure_TextBox.Text = string.Format("{0:F1}", Result_Parsing);
+                                    Curr_Measure_TextBox.Text = string.Format("{0:F1}", Result_Parsing) + "%";
                                 });
 
 
@@ -2478,11 +2344,7 @@ namespace ControllerPage
                                     Current_Avg_TextBox.Text = total_current_Average.ToString("0.00") + "%";
                                     //Final Average
                                 });
-                                Textbox_Forever.Invoke((Action)delegate
-                                {
-                                    //Curr_Kernel_TextBox.Text = (counter_data + 1).ToString();
-                                    Textbox_Forever.Text = forever_str;
-                                });
+
 
                                 //loat Result_Parsing_input = float.Parse(Result_Parsing);
                                 Sensor_input_Helper.MySql_Insert_Measure(batch_id, 1000 + current_interval + 1, float.Parse(Result_Parsing), DateTime.Now, 1, 1);
@@ -2597,5 +2459,100 @@ namespace ControllerPage
 
         }
 
+        private void textBox15_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button_Mode_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormMode())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ModeSelection;            //values preserved after close
+                    //Do something here with these values
+                    string display_val = val.Replace("_", " ");
+                    Button_Mode.Text = display_val;
+
+                }
+            }
+            if (Button_Mode.Text.ToLower() == "fixed time")
+            {
+
+                Console.WriteLine("Time mode");
+                ButtonProduct.Enabled = true;
+                ButtonNumInterval.Enabled = false;
+                ButtonNumInterval.Text = string.Empty;
+                ButtonNumPcs.Enabled = false;
+                ButtonNumPcs.Text = string.Empty;
+                ButtonWaitingTime.Enabled = true;
+                ButtonWaitingTime.Text = string.Empty;
+                textBox9.Text = "Running Time";
+
+            }
+            else if (Button_Mode.Text.ToLower() == "fixed pieces")
+            {
+
+                Console.WriteLine("Time mode");
+                ButtonProduct.Enabled = true;
+                ButtonNumInterval.Enabled = false;
+                ButtonNumInterval.Text = string.Empty;
+                ButtonNumPcs.Enabled = true;
+                //ButtonNumPcs.Text = string.Empty;
+                ButtonWaitingTime.Enabled = false;
+                ButtonWaitingTime.Text = string.Empty;
+
+            }
+
+            else if (Button_Mode.Text.ToLower() == "interval")
+            {
+                ButtonProduct.Enabled = true;
+                ButtonNumInterval.Enabled = true;
+                ButtonNumPcs.Enabled = true;
+                ButtonWaitingTime.Enabled = true;
+                ButtonWaitingTime.Text = string.Empty;
+                textBox9.Text = "Int. Waiting Time";
+
+            }
+            else
+            {
+                MessageBox.Show("Please pick Mode", application_name);
+            }
+
+
+
+        }
+
+        private void Button_Interface_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormInterface())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.Interfaceselection;            //values preserved after close
+                    //Do something here with these values
+                    string display_val = val.Replace("_", " ");
+                    Button_Interface.Text = display_val;
+
+                }
+            }
+            if (Button_Interface.Text == "RS-232")
+            {
+                mySerialPort = new SerialPort("/dev/ttyAMA0"); //232
+            }
+            else if (Button_Interface.Text == "RS-485")
+            {
+                mySerialPort = new SerialPort("/dev/ttyS0"); //485
+            }
+            else
+            {
+                MessageBox.Show("Please Pick Interface", application_name);
+            }
+
+           
+        }
     }
 }
