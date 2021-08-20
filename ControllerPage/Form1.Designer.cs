@@ -1,4 +1,8 @@
 ﻿
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+
 namespace ControllerPage
 {
     partial class Form1
@@ -30,6 +34,8 @@ namespace ControllerPage
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.Button_Interface = new System.Windows.Forms.Button();
+            this.Button_Mode = new System.Windows.Forms.Button();
             this.ButtonIPSet = new System.Windows.Forms.Button();
             this.textBox16 = new System.Windows.Forms.TextBox();
             this.Btn_CheckTemp = new System.Windows.Forms.Button();
@@ -61,8 +67,6 @@ namespace ControllerPage
             this.Btn_Stop = new System.Windows.Forms.Button();
             this.textBox15 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.Button_Mode = new System.Windows.Forms.Button();
-            this.Button_Interface = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -121,9 +125,9 @@ namespace ControllerPage
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.955863F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.486254F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.041136F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.789208F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.642677F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.780488F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.317073F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.2439F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.560976F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.04878F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.390749F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.390749F));
@@ -133,16 +137,46 @@ namespace ControllerPage
             this.tableLayoutPanel1.Size = new System.Drawing.Size(660, 410);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
+            // Button_Interface
+            // 
+            this.Button_Interface.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.Button_Interface.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.tableLayoutPanel1.SetColumnSpan(this.Button_Interface, 2);
+            this.Button_Interface.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_Interface.Location = new System.Drawing.Point(133, 40);
+            this.Button_Interface.Name = "Button_Interface";
+            this.tableLayoutPanel1.SetRowSpan(this.Button_Interface, 2);
+            this.Button_Interface.Size = new System.Drawing.Size(124, 53);
+            this.Button_Interface.TabIndex = 66;
+            this.Button_Interface.Text = "INTERFACE";
+            this.Button_Interface.UseVisualStyleBackColor = false;
+            this.Button_Interface.Click += new System.EventHandler(this.Button_Interface_Click);
+            // 
+            // Button_Mode
+            // 
+            this.Button_Mode.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.Button_Mode.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.tableLayoutPanel1.SetColumnSpan(this.Button_Mode, 2);
+            this.Button_Mode.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_Mode.Location = new System.Drawing.Point(3, 40);
+            this.Button_Mode.Name = "Button_Mode";
+            this.tableLayoutPanel1.SetRowSpan(this.Button_Mode, 2);
+            this.Button_Mode.Size = new System.Drawing.Size(124, 53);
+            this.Button_Mode.TabIndex = 65;
+            this.Button_Mode.Text = "MODE";
+            this.Button_Mode.UseVisualStyleBackColor = false;
+            this.Button_Mode.Click += new System.EventHandler(this.Button_Mode_Click);
+            // 
             // ButtonIPSet
             // 
             this.ButtonIPSet.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.ButtonIPSet.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.ButtonIPSet.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tableLayoutPanel1.SetColumnSpan(this.ButtonIPSet, 2);
             this.ButtonIPSet.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ButtonIPSet.Location = new System.Drawing.Point(524, 40);
             this.ButtonIPSet.Name = "ButtonIPSet";
             this.tableLayoutPanel1.SetRowSpan(this.ButtonIPSet, 2);
-            this.ButtonIPSet.Size = new System.Drawing.Size(126, 54);
+            this.ButtonIPSet.Size = new System.Drawing.Size(131, 54);
             this.ButtonIPSet.TabIndex = 62;
             this.ButtonIPSet.Text = "1";
             this.ButtonIPSet.UseVisualStyleBackColor = false;
@@ -164,7 +198,7 @@ namespace ControllerPage
             // Btn_CheckTemp
             // 
             this.Btn_CheckTemp.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.Btn_CheckTemp.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.Btn_CheckTemp.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tableLayoutPanel1.SetColumnSpan(this.Btn_CheckTemp, 2);
             this.Btn_CheckTemp.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_CheckTemp.Location = new System.Drawing.Point(263, 40);
@@ -241,7 +275,7 @@ namespace ControllerPage
             // Btn_Check
             // 
             this.Btn_Check.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.Btn_Check.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.Btn_Check.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tableLayoutPanel1.SetColumnSpan(this.Btn_Check, 2);
             this.Btn_Check.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Check.Location = new System.Drawing.Point(394, 40);
@@ -258,7 +292,7 @@ namespace ControllerPage
             this.textBox5.BackColor = System.Drawing.SystemColors.Control;
             this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(329, 272);
+            this.textBox5.Location = new System.Drawing.Point(3, 272);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(0, 19);
             this.textBox5.TabIndex = 37;
@@ -323,13 +357,13 @@ namespace ControllerPage
             // ButtonProduct
             // 
             this.ButtonProduct.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ButtonProduct.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.ButtonProduct.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tableLayoutPanel1.SetColumnSpan(this.ButtonProduct, 2);
             this.ButtonProduct.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ButtonProduct.Location = new System.Drawing.Point(3, 340);
             this.ButtonProduct.Name = "ButtonProduct";
             this.tableLayoutPanel1.SetRowSpan(this.ButtonProduct, 2);
-            this.ButtonProduct.Size = new System.Drawing.Size(124, 67);
+            this.ButtonProduct.Size = new System.Drawing.Size(124, 66);
             this.ButtonProduct.TabIndex = 1;
             this.ButtonProduct.Text = "Corn";
             this.ButtonProduct.UseVisualStyleBackColor = false;
@@ -338,13 +372,13 @@ namespace ControllerPage
             // ButtonNumInterval
             // 
             this.ButtonNumInterval.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ButtonNumInterval.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.ButtonNumInterval.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tableLayoutPanel1.SetColumnSpan(this.ButtonNumInterval, 2);
             this.ButtonNumInterval.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ButtonNumInterval.Location = new System.Drawing.Point(133, 340);
             this.ButtonNumInterval.Name = "ButtonNumInterval";
             this.tableLayoutPanel1.SetRowSpan(this.ButtonNumInterval, 2);
-            this.ButtonNumInterval.Size = new System.Drawing.Size(124, 67);
+            this.ButtonNumInterval.Size = new System.Drawing.Size(124, 66);
             this.ButtonNumInterval.TabIndex = 49;
             this.ButtonNumInterval.Text = "1";
             this.ButtonNumInterval.UseVisualStyleBackColor = false;
@@ -353,13 +387,13 @@ namespace ControllerPage
             // ButtonNumPcs
             // 
             this.ButtonNumPcs.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ButtonNumPcs.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.ButtonNumPcs.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tableLayoutPanel1.SetColumnSpan(this.ButtonNumPcs, 2);
             this.ButtonNumPcs.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ButtonNumPcs.Location = new System.Drawing.Point(263, 340);
             this.ButtonNumPcs.Name = "ButtonNumPcs";
             this.tableLayoutPanel1.SetRowSpan(this.ButtonNumPcs, 2);
-            this.ButtonNumPcs.Size = new System.Drawing.Size(125, 67);
+            this.ButtonNumPcs.Size = new System.Drawing.Size(125, 66);
             this.ButtonNumPcs.TabIndex = 50;
             this.ButtonNumPcs.Text = "10";
             this.ButtonNumPcs.UseVisualStyleBackColor = false;
@@ -368,13 +402,13 @@ namespace ControllerPage
             // ButtonWaitingTime
             // 
             this.ButtonWaitingTime.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ButtonWaitingTime.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.ButtonWaitingTime.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tableLayoutPanel1.SetColumnSpan(this.ButtonWaitingTime, 2);
             this.ButtonWaitingTime.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ButtonWaitingTime.Location = new System.Drawing.Point(394, 340);
             this.ButtonWaitingTime.Name = "ButtonWaitingTime";
             this.tableLayoutPanel1.SetRowSpan(this.ButtonWaitingTime, 2);
-            this.ButtonWaitingTime.Size = new System.Drawing.Size(124, 67);
+            this.ButtonWaitingTime.Size = new System.Drawing.Size(124, 66);
             this.ButtonWaitingTime.TabIndex = 51;
             this.ButtonWaitingTime.Text = "1 min";
             this.ButtonWaitingTime.UseVisualStyleBackColor = false;
@@ -383,13 +417,13 @@ namespace ControllerPage
             // ButtonOption
             // 
             this.ButtonOption.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ButtonOption.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.ButtonOption.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tableLayoutPanel1.SetColumnSpan(this.ButtonOption, 2);
             this.ButtonOption.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonOption.Location = new System.Drawing.Point(524, 340);
+            this.ButtonOption.Location = new System.Drawing.Point(525, 340);
             this.ButtonOption.Name = "ButtonOption";
             this.tableLayoutPanel1.SetRowSpan(this.ButtonOption, 2);
-            this.ButtonOption.Size = new System.Drawing.Size(133, 67);
+            this.ButtonOption.Size = new System.Drawing.Size(131, 66);
             this.ButtonOption.TabIndex = 52;
             this.ButtonOption.Text = "Options";
             this.ButtonOption.UseVisualStyleBackColor = false;
@@ -397,27 +431,27 @@ namespace ControllerPage
             // 
             // textBox10
             // 
+            this.textBox10.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox10.BackColor = System.Drawing.SystemColors.Control;
             this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox10.Location = new System.Drawing.Point(263, 103);
             this.textBox10.Multiline = true;
             this.textBox10.Name = "textBox10";
-            this.tableLayoutPanel1.SetRowSpan(this.textBox10, 2);
-            this.textBox10.Size = new System.Drawing.Size(60, 55);
+            this.textBox10.Size = new System.Drawing.Size(60, 26);
             this.textBox10.TabIndex = 47;
             this.textBox10.Text = "Interval Number";
             // 
             // textBox14
             // 
+            this.textBox14.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox14.BackColor = System.Drawing.SystemColors.Control;
             this.textBox14.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox14.Location = new System.Drawing.Point(263, 176);
+            this.textBox14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox14.Location = new System.Drawing.Point(263, 171);
             this.textBox14.Multiline = true;
             this.textBox14.Name = "textBox14";
-            this.tableLayoutPanel1.SetRowSpan(this.textBox14, 2);
-            this.textBox14.Size = new System.Drawing.Size(60, 49);
+            this.textBox14.Size = new System.Drawing.Size(60, 26);
             this.textBox14.TabIndex = 23;
             this.textBox14.Text = "Kernel Counter";
             // 
@@ -427,10 +461,9 @@ namespace ControllerPage
             this.Curr_Interval_TextBox.BackColor = System.Drawing.SystemColors.Control;
             this.Curr_Interval_TextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tableLayoutPanel1.SetColumnSpan(this.Curr_Interval_TextBox, 2);
-            this.Curr_Interval_TextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Curr_Interval_TextBox.Location = new System.Drawing.Point(329, 122);
+            this.Curr_Interval_TextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Curr_Interval_TextBox.Location = new System.Drawing.Point(329, 103);
             this.Curr_Interval_TextBox.Name = "Curr_Interval_TextBox";
-            this.tableLayoutPanel1.SetRowSpan(this.Curr_Interval_TextBox, 2);
             this.Curr_Interval_TextBox.Size = new System.Drawing.Size(124, 28);
             this.Curr_Interval_TextBox.TabIndex = 25;
             // 
@@ -440,7 +473,7 @@ namespace ControllerPage
             this.Current_Avg_TextBox.BackColor = System.Drawing.SystemColors.Control;
             this.Current_Avg_TextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tableLayoutPanel1.SetColumnSpan(this.Current_Avg_TextBox, 2);
-            this.Current_Avg_TextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Current_Avg_TextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Current_Avg_TextBox.Location = new System.Drawing.Point(329, 239);
             this.Current_Avg_TextBox.Name = "Current_Avg_TextBox";
             this.Current_Avg_TextBox.Size = new System.Drawing.Size(124, 28);
@@ -449,10 +482,10 @@ namespace ControllerPage
             // Btn_Start
             // 
             this.Btn_Start.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.Btn_Start.BackColor = System.Drawing.Color.Yellow;
+            this.Btn_Start.BackColor = System.Drawing.Color.Lime;
             this.tableLayoutPanel1.SetColumnSpan(this.Btn_Start, 3);
             this.Btn_Start.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Start.Location = new System.Drawing.Point(465, 107);
+            this.Btn_Start.Location = new System.Drawing.Point(465, 110);
             this.Btn_Start.Name = "Btn_Start";
             this.tableLayoutPanel1.SetRowSpan(this.Btn_Start, 3);
             this.Btn_Start.Size = new System.Drawing.Size(192, 85);
@@ -490,10 +523,9 @@ namespace ControllerPage
             this.Curr_Kernel_TextBox.BackColor = System.Drawing.SystemColors.Control;
             this.Curr_Kernel_TextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tableLayoutPanel1.SetColumnSpan(this.Curr_Kernel_TextBox, 2);
-            this.Curr_Kernel_TextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Curr_Kernel_TextBox.Location = new System.Drawing.Point(329, 190);
+            this.Curr_Kernel_TextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Curr_Kernel_TextBox.Location = new System.Drawing.Point(329, 170);
             this.Curr_Kernel_TextBox.Name = "Curr_Kernel_TextBox";
-            this.tableLayoutPanel1.SetRowSpan(this.Curr_Kernel_TextBox, 2);
             this.Curr_Kernel_TextBox.Size = new System.Drawing.Size(124, 28);
             this.Curr_Kernel_TextBox.TabIndex = 26;
             // 
@@ -504,10 +536,10 @@ namespace ControllerPage
             this.Curr_Measure_TextBox.BackColor = System.Drawing.SystemColors.Control;
             this.Curr_Measure_TextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tableLayoutPanel1.SetColumnSpan(this.Curr_Measure_TextBox, 4);
-            this.Curr_Measure_TextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Curr_Measure_TextBox.Location = new System.Drawing.Point(12, 192);
+            this.Curr_Measure_TextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Curr_Measure_TextBox.Location = new System.Drawing.Point(12, 170);
             this.Curr_Measure_TextBox.Name = "Curr_Measure_TextBox";
-            this.tableLayoutPanel1.SetRowSpan(this.Curr_Measure_TextBox, 4);
+            this.tableLayoutPanel1.SetRowSpan(this.Curr_Measure_TextBox, 3);
             this.Curr_Measure_TextBox.Size = new System.Drawing.Size(235, 91);
             this.Curr_Measure_TextBox.TabIndex = 21;
             this.Curr_Measure_TextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -518,7 +550,7 @@ namespace ControllerPage
             this.Btn_Stop.BackColor = System.Drawing.Color.Red;
             this.tableLayoutPanel1.SetColumnSpan(this.Btn_Stop, 3);
             this.Btn_Stop.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Stop.Location = new System.Drawing.Point(465, 209);
+            this.Btn_Stop.Location = new System.Drawing.Point(465, 212);
             this.Btn_Stop.Name = "Btn_Stop";
             this.tableLayoutPanel1.SetRowSpan(this.Btn_Stop, 3);
             this.Btn_Stop.Size = new System.Drawing.Size(192, 84);
@@ -530,14 +562,14 @@ namespace ControllerPage
             // textBox15
             // 
             this.textBox15.AcceptsReturn = true;
+            this.textBox15.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox15.BackColor = System.Drawing.SystemColors.Control;
             this.textBox15.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox15.Location = new System.Drawing.Point(263, 239);
             this.textBox15.Multiline = true;
             this.textBox15.Name = "textBox15";
-            this.tableLayoutPanel1.SetRowSpan(this.textBox15, 2);
-            this.textBox15.Size = new System.Drawing.Size(60, 49);
+            this.textBox15.Size = new System.Drawing.Size(60, 26);
             this.textBox15.TabIndex = 24;
             this.textBox15.Text = "Average Moisture";
             this.textBox15.TextChanged += new System.EventHandler(this.textBox15_TextChanged);
@@ -545,44 +577,13 @@ namespace ControllerPage
             // label1
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.label1, 4);
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 100);
             this.label1.Name = "label1";
-            this.tableLayoutPanel1.SetRowSpan(this.label1, 2);
-            this.label1.Size = new System.Drawing.Size(254, 70);
+            this.label1.Size = new System.Drawing.Size(254, 32);
             this.label1.TabIndex = 64;
-            this.label1.Text = "Current Interval Moisture";
+            this.label1.Text = "Current Interval Moisture Measurement";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Button_Mode
-            // 
-            this.Button_Mode.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.Button_Mode.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.tableLayoutPanel1.SetColumnSpan(this.Button_Mode, 2);
-            this.Button_Mode.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button_Mode.Location = new System.Drawing.Point(3, 40);
-            this.Button_Mode.Name = "Button_Mode";
-            this.tableLayoutPanel1.SetRowSpan(this.Button_Mode, 2);
-            this.Button_Mode.Size = new System.Drawing.Size(124, 53);
-            this.Button_Mode.TabIndex = 65;
-            this.Button_Mode.Text = "MODE";
-            this.Button_Mode.UseVisualStyleBackColor = false;
-            this.Button_Mode.Click += new System.EventHandler(this.Button_Mode_Click);
-            // 
-            // Button_Interface
-            // 
-            this.Button_Interface.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.Button_Interface.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.tableLayoutPanel1.SetColumnSpan(this.Button_Interface, 2);
-            this.Button_Interface.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button_Interface.Location = new System.Drawing.Point(133, 40);
-            this.Button_Interface.Name = "Button_Interface";
-            this.tableLayoutPanel1.SetRowSpan(this.Button_Interface, 2);
-            this.Button_Interface.Size = new System.Drawing.Size(124, 53);
-            this.Button_Interface.TabIndex = 66;
-            this.Button_Interface.Text = "INTERFACE";
-            this.Button_Interface.UseVisualStyleBackColor = false;
-            this.Button_Interface.Click += new System.EventHandler(this.Button_Interface_Click);
             // 
             // Form1
             // 
@@ -593,10 +594,15 @@ namespace ControllerPage
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Gii RX-30 Automatic In-line Interval Moisture Measurement System (Ver 1.01)";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
+
+        }
+
+        private void tableLayoutPanel1_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
+        {
 
         }
 

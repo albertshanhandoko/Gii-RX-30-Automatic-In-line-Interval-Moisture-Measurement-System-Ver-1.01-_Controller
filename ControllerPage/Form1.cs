@@ -581,8 +581,8 @@ namespace ControllerPage
 
             //textBox_sensornumber.Text = "SENSOR " + (Sensor_input_Helper.GetLocalIPAddress()).Last().ToString();
 
-            label_ipaddress.Text = "SENSOR " + (Sensor_input_Helper.GetLocalIPAddress()).Last().ToString();
-
+            //label_ipaddress.Text = "SENSOR " + (Sensor_input_Helper.GetLocalIPAddress()).Last().ToString();
+            label_ipaddress.Text = "Sensor Number";
 
         }
 
@@ -2554,5 +2554,6 @@ namespace ControllerPage
 
            
         }
+
     }
 }

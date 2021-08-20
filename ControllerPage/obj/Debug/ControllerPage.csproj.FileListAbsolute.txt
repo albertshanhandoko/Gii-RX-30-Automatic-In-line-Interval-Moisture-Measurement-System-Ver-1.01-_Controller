@@ -346,4 +346,3 @@ D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_C
 D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_ComfilePI\ControllerPage\obj\Debug\ControllerPage.pdb
 D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_ComfilePI\ControllerPage\obj\Debug\ControllerPage.FormMode.resources
 D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_ComfilePI\ControllerPage\obj\Debug\ControllerPage.FormInterface.resources
-D:\Git Project\Final_UI_Controller\comfilepicontroller-080821\Final_Controller_ComfilePI\ControllerPage\obj\Debug\ControllerPage.csprojAssemblyReference.cache
