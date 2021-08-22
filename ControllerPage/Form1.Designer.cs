@@ -325,7 +325,7 @@ namespace ControllerPage
             this.textBox7.TabIndex = 9;
             this.textBox7.Text = "No. of Intervals";
             this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
+            //this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             // 
             // textBox6
             // 
@@ -572,7 +572,7 @@ namespace ControllerPage
             this.textBox15.Size = new System.Drawing.Size(60, 26);
             this.textBox15.TabIndex = 24;
             this.textBox15.Text = "Average Moisture";
-            this.textBox15.TextChanged += new System.EventHandler(this.textBox15_TextChanged);
+            //this.textBox15.TextChanged += new System.EventHandler(this.textBox15_TextChanged);
             // 
             // label1
             // 

@@ -92,7 +92,24 @@ namespace ControllerPage
             InitializeComponent();
             MyTimer.Elapsed += new ElapsedEventHandler(MyTimer_Tick);
             MyTimer.Interval = (1000);
-            
+
+            /*
+            string result = "137";
+            string checksum_result = "A0";
+            bool result1 = Sensor_input_Helper.checksum(result, checksum_result);
+            Console.WriteLine("result1 adalah: + " + result1.ToString());
+
+            result = "136";
+            checksum_result = "9F";
+            bool result2 = Sensor_input_Helper.checksum(result, checksum_result);
+            Console.WriteLine("result2 adalah: + " + result2.ToString());
+
+            result = "115";
+            checksum_result = "97";
+            bool result3 = Sensor_input_Helper.checksum(result, checksum_result);
+            Console.WriteLine("result3 adalah: + " + result3.ToString());
+
+            */
             data_initiation_input();
 
         }
@@ -127,7 +144,108 @@ namespace ControllerPage
 
 
         #region Button_Func
-        
+
+
+        private void Button_Mode_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormMode())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ModeSelection;            //values preserved after close
+                    //Do something here with these values
+                    string display_val = val.Replace("_", " ");
+                    Button_Mode.Text = display_val;
+
+                }
+            }
+            if (Button_Mode.Text.ToLower() == "fixed time")
+            {
+
+                Console.WriteLine("Time mode");
+                ButtonProduct.Enabled = true;
+                ButtonNumInterval.Enabled = false;
+                ButtonNumInterval.Text = string.Empty;
+                ButtonNumPcs.Enabled = false;
+                ButtonNumPcs.Text = string.Empty;
+                ButtonWaitingTime.Enabled = true;
+                ButtonWaitingTime.Text = string.Empty;
+                textBox9.Text = "Running Time";
+
+            }
+            else if (Button_Mode.Text.ToLower() == "fixed pieces")
+            {
+
+                Console.WriteLine("Time mode");
+                ButtonProduct.Enabled = true;
+                ButtonNumInterval.Enabled = false;
+                ButtonNumInterval.Text = string.Empty;
+                ButtonNumPcs.Enabled = true;
+                //ButtonNumPcs.Text = string.Empty;
+                ButtonWaitingTime.Enabled = false;
+                ButtonWaitingTime.Text = string.Empty;
+
+            }
+
+            else if (Button_Mode.Text.ToLower() == "interval")
+            {
+                ButtonProduct.Enabled = true;
+                ButtonNumInterval.Enabled = true;
+                ButtonNumPcs.Enabled = true;
+                ButtonWaitingTime.Enabled = true;
+                ButtonWaitingTime.Text = string.Empty;
+                textBox9.Text = "Int. Waiting Time";
+
+            }
+            else
+            {
+                MessageBox.Show("Please pick Mode", application_name);
+            }
+
+
+
+        }
+        private void Button_Interface_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormInterface())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.Interfaceselection;            //values preserved after close
+                    //Do something here with these values
+                    string display_val = val.Replace("_", " ");
+                    Button_Interface.Text = display_val;
+
+                }
+            }
+            if (Button_Interface.Text == "RS-232")
+            {
+                mySerialPort = new SerialPort("/dev/ttyAMA0"); //232
+            }
+            else if (Button_Interface.Text == "RS-485")
+            {
+                mySerialPort = new SerialPort("/dev/ttyS0"); //485
+            }
+            else
+            {
+                MessageBox.Show("Please Pick Interface", application_name);
+            }
+
+
+        }
+        private void ButtonIPSet_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormIPSet())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    ButtonIPSet.Text = FormIPSet.combobox_selectedItem_ipsetting;
+                }
+            }
+        }
 
         private void button_Product_Click(object sender, EventArgs e)
         {
@@ -434,6 +552,52 @@ namespace ControllerPage
         #endregion
 
         #region Function
+
+
+        private List<string> GetWords(string text)
+        {
+            Regex reg = new Regex("[a-zA-Z0-9]");
+            string Word = "";
+            char[] ca = text.ToCharArray();
+            List<string> characters = new List<string>();
+            for (int i = 0; i < ca.Length; i++)
+            {
+                char c = ca[i];
+                if (c > 65535)
+                {
+                    continue;
+                }
+                if (char.IsHighSurrogate(c))
+                {
+                    i++;
+                    characters.Add(new string(new[] { c, ca[i] }));
+                }
+                else
+                {
+                    if (reg.Match(c.ToString()).Success || c.ToString() == "/")
+                    {
+                        Word = Word + c.ToString();
+                        //characters.Add(new string(new[] { c }));
+                    }
+                    else if (c.ToString() == " ")
+                    {
+                        if (Word.Length > 0)
+                            characters.Add(Word);
+                        Word = "";
+                    }
+                    else
+                    {
+                        if (Word.Length > 0)
+                            characters.Add(Word);
+                        Word = "";
+                    }
+
+                }
+
+            }
+            return characters;
+        }
+
         private bool check_connection_sensor()
         {
             bool check_result = false;
@@ -543,17 +707,9 @@ namespace ControllerPage
         private void data_initiation_input()
         {
 
-            //comboBox_IPAddress.Items.Clear();
-            //comboBox_IPAddress.Items.Add(Sensor_input_Helper.GetLocalIPAddress());
-
             ButtonIPSet.Text = Sensor_input_Helper.GetLocalIPAddress().Last().ToString() ;
-            // Comport
-            //Button_Interface.Text = "INTERFACE";
-
-            //Button_Interface.Items.Add("COM2");
-
-            // Controller Mode
             Button_Mode.Text = "MODE";
+
             // Mode cannot be clicked
             Button_Mode.Enabled = false;
 
@@ -709,7 +865,6 @@ namespace ControllerPage
             return isvalid;
 
         }
-
         private string CheckTemp()
         {
             temp_cond = true;
@@ -806,7 +961,6 @@ namespace ControllerPage
             return Result_Parsing;
             //Sensor_input_Helper.Command_Stop(mySerialPort);
         }
-
         private bool check_db_connection()
         {
             bool check_dbcon = false;
@@ -821,8 +975,6 @@ namespace ControllerPage
 
         private void next_action_button(bool bool_check_error_next)
         {
-
-            
             if (!bool_check_error_next)
             {
                 // klo ga error
@@ -976,6 +1128,7 @@ namespace ControllerPage
                 string Error_Message = Sensor_input_Helper.GetDescription(enum_ErrorCode);
                 MessageBox.Show(this, Error_Message, application_name);
 
+
             }
             return bool_check_error;
 
@@ -983,50 +1136,6 @@ namespace ControllerPage
 
         #endregion
 
-
-        private List<string> GetWords(string text)
-        {
-            Regex reg = new Regex("[a-zA-Z0-9]");
-            string Word = "";
-            char[] ca = text.ToCharArray();
-            List<string> characters = new List<string>();
-            for (int i = 0; i < ca.Length; i++)
-            {
-                char c = ca[i];
-                if (c > 65535)
-                {
-                    continue;
-                }
-                if (char.IsHighSurrogate(c))
-                {
-                    i++;
-                    characters.Add(new string(new[] { c, ca[i] }));
-                }
-                else
-                {
-                    if (reg.Match(c.ToString()).Success || c.ToString() == "/")
-                    {
-                        Word = Word + c.ToString();
-                        //characters.Add(new string(new[] { c }));
-                    }
-                    else if (c.ToString() == " ")
-                    {
-                        if (Word.Length > 0)
-                            characters.Add(Word);
-                        Word = "";
-                    }
-                    else
-                    {
-                        if (Word.Length > 0)
-                            characters.Add(Word);
-                        Word = "";
-                    }
-
-                }
-
-            }
-            return characters;
-        }
 
         #region Timer
         private void MyTimer_CheckStop_Tick(object sender, EventArgs e)
@@ -1380,13 +1489,17 @@ namespace ControllerPage
                                 // masukin olah data yag lama 
                             }
 
-                            else if (
-                                readStr.Trim().ToLower().Contains("r")
-                                //&& counter_data_reset > (int.Parse(ButtonNumPcs.Text) / 2)
-                                && counter_data_reset >= 1
-                                && !readStr.Any(c => char.IsDigit(c))
-                                && countingbatch == true
-                                )
+                            else if 
+                                (
+                                    (
+                                        readStr.Trim().ToLower().Contains("r")
+                                        //&& counter_data_reset > (int.Parse(ButtonNumPcs.Text) / 2)
+                                        && counter_data_reset >= 1
+                                        && !readStr.Any(c => char.IsDigit(c))
+                                        && countingbatch == true
+                                    )
+                                        || bool_stop_click == true
+                                 )
                             {
                                 //counter_data = 0;
                                 counter_data_reset = 0;
@@ -1406,13 +1519,45 @@ namespace ControllerPage
 
                                     if (test1 && test2 && test3 && test4)
                                     {
-
                                         Result_Parsing = GetWords(Measure).FirstOrDefault(); // hilangin ETX dan STX
-                                                                                             // Data cleansing
                                         foreach (string s in charactersToReplace)
                                         {
                                             Result_Parsing = Result_Parsing.Replace(s, "");
                                         }
+
+                                        /*
+                                        #region compare checksum
+
+                                        string checksum_parsing = Measure.Substring(5, 2);
+
+                                        bool checksum_result = Sensor_input_Helper.checksum(Result_Parsing, checksum_parsing);
+                                        Console.WriteLine("Test: ");
+                                        Console.WriteLine("result_parsing adalah: " + Result_Parsing);
+                                        Console.WriteLine("checksum_parsing adalah: " + checksum_parsing);
+                                        Console.WriteLine("checksum_result adalah: " + checksum_result);
+
+                                        if (checksum_result)
+                                        {
+                                            aggregate_cond = false;
+                                            Measure_Cond = false;
+                                            countingbatch = false;
+                                            bool_check_error = true;
+                                            Console.WriteLine("MyTimerStop");
+                                            
+                                            Sensor_input_Helper.Update_ErrorCode(Sensor_input_Helper.GetLocalIPAddress(), batch_id, "030");
+                                            MessageBox.Show(this, "Error-030", application_name);
+
+
+                                        }
+
+                                        // 2-4 nilai 
+                                        // 6-7 checksum
+
+
+                                        #endregion
+                                        // Data cleansing
+                                        */
+
                                         Result_Parsing = String.Concat(Result_Parsing.Substring(0, Result_Parsing.Length - 1)
                                                 , ".", Result_Parsing.Substring(Result_Parsing.Length - 1, 1));
 
@@ -1556,6 +1701,40 @@ namespace ControllerPage
                                 Console.WriteLine("Finish Aggregate");
                                 readStr = string.Empty;
                             }
+                            else if (
+                                 (Data_Measure_Result.Count == 0 && Result_Parsing.Substring(3, 5) == "00000")
+                                 || (!Result_Parsing.Contains("-") && (Result_Parsing.Length) > 10)
+                                 )
+                            {
+                                Result_Parsing = "0.0";
+
+                                Data_Avg_Result.Add(new data_measure_2(100, Result_Parsing, (DateTime.Now).ToString()));
+                                aggregate_cond = false;
+
+
+                                Curr_Measure_TextBox.Invoke((Action)delegate
+                                {
+                                    Curr_Measure_TextBox.Text = Result_Parsing + "%";
+                                });
+
+                                Current_Avg_TextBox.Invoke((Action)delegate
+                                {
+                                    foreach (data_measure_2 average_val in Data_Avg_Result)
+                                    {
+                                        total_average = total_average + float.Parse(average_val.Measures);
+                                    }
+
+                                    total_current_Average = total_average / Data_Avg_Result.Count();
+                                    Current_Avg_TextBox.Text = total_current_Average.ToString("0.0") + "%";
+                                    //Final Average
+                                });
+
+                            }
+                            else
+                            {
+                                Console.WriteLine("Aggreagte empty");
+                            }
+
                         }
                         //start_next_init++;
                     }
@@ -1952,7 +2131,7 @@ namespace ControllerPage
                                     }
 
                                     else if (
-                                        Data_Measure_Result.Count == 0
+                                        (Data_Measure_Result.Count == 0 && Result_Parsing.Substring(3,5) == "00000") 
                                         || (!Result_Parsing.Contains("-") && (Result_Parsing.Length) > 10)
 
                                         )
@@ -1985,6 +2164,7 @@ namespace ControllerPage
                                     {
                                         Console.WriteLine("Aggreagte empty");
                                     }
+
                                 }
                                 //start_next_init++;
                             }
@@ -2163,12 +2343,16 @@ namespace ControllerPage
                             }
 
                             else if (
+                                (
                                 readStr.Trim().ToLower().Contains("r")
                                 //&& counter_data_reset > (int.Parse(ButtonNumPcs.Text) / 2)
                                 && counter_data_reset >= 1
 
                                 && !readStr.Any(c => char.IsDigit(c))
                                 && countingbatch == true
+                                )
+                                || bool_stop_click == true
+
                                 )
                             {
                                 //counter_data = 0;
@@ -2352,7 +2536,44 @@ namespace ControllerPage
                                 Console.WriteLine("Finish Aggregate");
                                 readStr = string.Empty;
                             }
+                            else if (
+                                        (Data_Measure_Result.Count == 0 && Result_Parsing.Substring(3, 5) == "00000")
+                                        || (!Result_Parsing.Contains("-") && (Result_Parsing.Length) > 10)
+
+                                        )
+                            {
+                                Result_Parsing = "0.0";
+
+                                Data_Avg_Result.Add(new data_measure_2(100, Result_Parsing, (DateTime.Now).ToString()));
+                                aggregate_cond = false;
+
+
+                                Curr_Measure_TextBox.Invoke((Action)delegate
+                                {
+                                    Curr_Measure_TextBox.Text = Result_Parsing + "%";
+                                });
+
+                                Current_Avg_TextBox.Invoke((Action)delegate
+                                {
+                                    foreach (data_measure_2 average_val in Data_Avg_Result)
+                                    {
+                                        total_average = total_average + float.Parse(average_val.Measures);
+                                    }
+
+                                    total_current_Average = total_average / Data_Avg_Result.Count();
+                                    Current_Avg_TextBox.Text = total_current_Average.ToString("0.0") + "%";
+                                    //Final Average
+                                });
+
+                            }
+                            else
+                            {
+                                Console.WriteLine("Aggreagte empty");
+                            }
+
+
                         }
+
                         //start_next_init++;
                     }
 
@@ -2411,149 +2632,7 @@ namespace ControllerPage
         }
 
         #endregion
-        private void textBox7_TextChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            try
-            {
-                check_Error("010");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("ERROR CODE SALAH");
-                Console.WriteLine(ex.Message);
-                //  Block of code to handle errors
-            }
-        }
-
-        private void Curr_Interval_TextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ButtonIPSet_Click(object sender, EventArgs e)
-        {
-            using (var form = new FormIPSet())
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    ButtonIPSet.Text = FormIPSet.combobox_selectedItem_ipsetting;
-                }
-            }
-        }
-        private void button4_Click(object sender, EventArgs e)
-        {
-            using (var form = new FormIPSet())
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    ButtonIPSet.Text = FormIPSet.combobox_selectedItem_ipsetting;
-                }
-            }
-
-        }
-
-        private void textBox15_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Button_Mode_Click(object sender, EventArgs e)
-        {
-            using (var form = new FormMode())
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    string val = form.ModeSelection;            //values preserved after close
-                    //Do something here with these values
-                    string display_val = val.Replace("_", " ");
-                    Button_Mode.Text = display_val;
-
-                }
-            }
-            if (Button_Mode.Text.ToLower() == "fixed time")
-            {
-
-                Console.WriteLine("Time mode");
-                ButtonProduct.Enabled = true;
-                ButtonNumInterval.Enabled = false;
-                ButtonNumInterval.Text = string.Empty;
-                ButtonNumPcs.Enabled = false;
-                ButtonNumPcs.Text = string.Empty;
-                ButtonWaitingTime.Enabled = true;
-                ButtonWaitingTime.Text = string.Empty;
-                textBox9.Text = "Running Time";
-
-            }
-            else if (Button_Mode.Text.ToLower() == "fixed pieces")
-            {
-
-                Console.WriteLine("Time mode");
-                ButtonProduct.Enabled = true;
-                ButtonNumInterval.Enabled = false;
-                ButtonNumInterval.Text = string.Empty;
-                ButtonNumPcs.Enabled = true;
-                //ButtonNumPcs.Text = string.Empty;
-                ButtonWaitingTime.Enabled = false;
-                ButtonWaitingTime.Text = string.Empty;
-
-            }
-
-            else if (Button_Mode.Text.ToLower() == "interval")
-            {
-                ButtonProduct.Enabled = true;
-                ButtonNumInterval.Enabled = true;
-                ButtonNumPcs.Enabled = true;
-                ButtonWaitingTime.Enabled = true;
-                ButtonWaitingTime.Text = string.Empty;
-                textBox9.Text = "Int. Waiting Time";
-
-            }
-            else
-            {
-                MessageBox.Show("Please pick Mode", application_name);
-            }
-
-
-
-        }
-
-        private void Button_Interface_Click(object sender, EventArgs e)
-        {
-            using (var form = new FormInterface())
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    string val = form.Interfaceselection;            //values preserved after close
-                    //Do something here with these values
-                    string display_val = val.Replace("_", " ");
-                    Button_Interface.Text = display_val;
-
-                }
-            }
-            if (Button_Interface.Text == "RS-232")
-            {
-                mySerialPort = new SerialPort("/dev/ttyAMA0"); //232
-            }
-            else if (Button_Interface.Text == "RS-485")
-            {
-                mySerialPort = new SerialPort("/dev/ttyS0"); //485
-            }
-            else
-            {
-                MessageBox.Show("Please Pick Interface", application_name);
-            }
-
-           
-        }
 
     }
 }

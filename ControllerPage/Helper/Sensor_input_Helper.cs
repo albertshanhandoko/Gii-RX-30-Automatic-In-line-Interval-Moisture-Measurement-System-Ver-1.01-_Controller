@@ -258,7 +258,7 @@ namespace ControllerPage.Helper
             return asList;
 
         }
-        public bool checksum(string rawvalue, string checksumread)
+        public static bool checksum(string rawvalue, string checksumread)
         {
             //string rawvalue ="129";
             int intValue = ((int)Char.GetNumericValue(rawvalue[0]) + (int)Char.GetNumericValue(rawvalue[1]) + (int)Char.GetNumericValue(rawvalue[2])) + 149;
@@ -686,6 +686,6 @@ namespace ControllerPage.Helper
             */
         }
 
-
+        
     }
 }
