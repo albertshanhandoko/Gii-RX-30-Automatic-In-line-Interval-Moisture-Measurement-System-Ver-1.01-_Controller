@@ -174,7 +174,6 @@ namespace ControllerPage
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FormProductselection";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Product Selection";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

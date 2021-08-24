@@ -30,10 +30,10 @@ namespace ControllerPage
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,6 +54,17 @@ namespace ControllerPage
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.99813F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(273, 230);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(41, 175);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(190, 51);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Fixed Pcs";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -92,17 +103,6 @@ namespace ControllerPage
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button1
-            // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(41, 175);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(190, 51);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Fixed Interval";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // FormMode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -111,7 +111,6 @@ namespace ControllerPage
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FormMode";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Product Selection";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

@@ -109,12 +109,12 @@ namespace ControllerPage
             this.tableLayoutPanel1.Controls.Add(this.textBox14, 4, 5);
             this.tableLayoutPanel1.Controls.Add(this.Curr_Interval_TextBox, 5, 3);
             this.tableLayoutPanel1.Controls.Add(this.Current_Avg_TextBox, 5, 7);
-            this.tableLayoutPanel1.Controls.Add(this.Btn_Start, 7, 3);
+            this.tableLayoutPanel1.Controls.Add(this.Btn_Start, 6, 3);
             this.tableLayoutPanel1.Controls.Add(this.label_ipaddress, 8, 0);
             this.tableLayoutPanel1.Controls.Add(this.label4, 8, 9);
             this.tableLayoutPanel1.Controls.Add(this.Curr_Kernel_TextBox, 5, 5);
             this.tableLayoutPanel1.Controls.Add(this.Curr_Measure_TextBox, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.Btn_Stop, 7, 6);
+            this.tableLayoutPanel1.Controls.Add(this.Btn_Stop, 6, 6);
             this.tableLayoutPanel1.Controls.Add(this.textBox15, 4, 7);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 3);
             this.tableLayoutPanel1.ForeColor = System.Drawing.SystemColors.InfoText;
@@ -124,10 +124,10 @@ namespace ControllerPage
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.390748F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.955863F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.486254F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.041136F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.317073F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.2439F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.560976F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.02439F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.341464F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.268292F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.536586F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.04878F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.390749F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.390749F));
@@ -325,7 +325,6 @@ namespace ControllerPage
             this.textBox7.TabIndex = 9;
             this.textBox7.Text = "No. of Intervals";
             this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            //this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             // 
             // textBox6
             // 
@@ -425,7 +424,7 @@ namespace ControllerPage
             this.tableLayoutPanel1.SetRowSpan(this.ButtonOption, 2);
             this.ButtonOption.Size = new System.Drawing.Size(131, 66);
             this.ButtonOption.TabIndex = 52;
-            this.ButtonOption.Text = "Options";
+            this.ButtonOption.Text = "ENTER";
             this.ButtonOption.UseVisualStyleBackColor = false;
             this.ButtonOption.Click += new System.EventHandler(this.button_Option_Click);
             // 
@@ -435,7 +434,7 @@ namespace ControllerPage
             this.textBox10.BackColor = System.Drawing.SystemColors.Control;
             this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox10.Location = new System.Drawing.Point(263, 103);
+            this.textBox10.Location = new System.Drawing.Point(263, 105);
             this.textBox10.Multiline = true;
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(60, 26);
@@ -448,7 +447,7 @@ namespace ControllerPage
             this.textBox14.BackColor = System.Drawing.SystemColors.Control;
             this.textBox14.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox14.Location = new System.Drawing.Point(263, 171);
+            this.textBox14.Location = new System.Drawing.Point(263, 169);
             this.textBox14.Multiline = true;
             this.textBox14.Name = "textBox14";
             this.textBox14.Size = new System.Drawing.Size(60, 26);
@@ -460,11 +459,10 @@ namespace ControllerPage
             this.Curr_Interval_TextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.Curr_Interval_TextBox.BackColor = System.Drawing.SystemColors.Control;
             this.Curr_Interval_TextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tableLayoutPanel1.SetColumnSpan(this.Curr_Interval_TextBox, 2);
             this.Curr_Interval_TextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Curr_Interval_TextBox.Location = new System.Drawing.Point(329, 103);
+            this.Curr_Interval_TextBox.Location = new System.Drawing.Point(329, 104);
             this.Curr_Interval_TextBox.Name = "Curr_Interval_TextBox";
-            this.Curr_Interval_TextBox.Size = new System.Drawing.Size(124, 28);
+            this.Curr_Interval_TextBox.Size = new System.Drawing.Size(59, 28);
             this.Curr_Interval_TextBox.TabIndex = 25;
             // 
             // Current_Avg_TextBox
@@ -472,23 +470,22 @@ namespace ControllerPage
             this.Current_Avg_TextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.Current_Avg_TextBox.BackColor = System.Drawing.SystemColors.Control;
             this.Current_Avg_TextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tableLayoutPanel1.SetColumnSpan(this.Current_Avg_TextBox, 2);
             this.Current_Avg_TextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Current_Avg_TextBox.Location = new System.Drawing.Point(329, 239);
             this.Current_Avg_TextBox.Name = "Current_Avg_TextBox";
-            this.Current_Avg_TextBox.Size = new System.Drawing.Size(124, 28);
+            this.Current_Avg_TextBox.Size = new System.Drawing.Size(59, 28);
             this.Current_Avg_TextBox.TabIndex = 27;
             // 
             // Btn_Start
             // 
-            this.Btn_Start.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.Btn_Start.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.Btn_Start.BackColor = System.Drawing.Color.Lime;
-            this.tableLayoutPanel1.SetColumnSpan(this.Btn_Start, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.Btn_Start, 4);
             this.Btn_Start.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Start.Location = new System.Drawing.Point(465, 110);
+            this.Btn_Start.Location = new System.Drawing.Point(429, 103);
             this.Btn_Start.Name = "Btn_Start";
             this.tableLayoutPanel1.SetRowSpan(this.Btn_Start, 3);
-            this.Btn_Start.Size = new System.Drawing.Size(192, 85);
+            this.Btn_Start.Size = new System.Drawing.Size(192, 95);
             this.Btn_Start.TabIndex = 28;
             this.Btn_Start.Text = "START";
             this.Btn_Start.UseVisualStyleBackColor = false;
@@ -511,22 +508,21 @@ namespace ControllerPage
             this.label4.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.label4, 2);
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(567, 312);
+            this.label4.Location = new System.Drawing.Point(563, 312);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 16);
+            this.label4.Size = new System.Drawing.Size(54, 16);
             this.label4.TabIndex = 63;
-            this.label4.Text = "Option";
+            this.label4.Text = "Options";
             // 
             // Curr_Kernel_TextBox
             // 
             this.Curr_Kernel_TextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.Curr_Kernel_TextBox.BackColor = System.Drawing.SystemColors.Control;
             this.Curr_Kernel_TextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tableLayoutPanel1.SetColumnSpan(this.Curr_Kernel_TextBox, 2);
             this.Curr_Kernel_TextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Curr_Kernel_TextBox.Location = new System.Drawing.Point(329, 170);
+            this.Curr_Kernel_TextBox.Location = new System.Drawing.Point(329, 168);
             this.Curr_Kernel_TextBox.Name = "Curr_Kernel_TextBox";
-            this.Curr_Kernel_TextBox.Size = new System.Drawing.Size(124, 28);
+            this.Curr_Kernel_TextBox.Size = new System.Drawing.Size(59, 28);
             this.Curr_Kernel_TextBox.TabIndex = 26;
             // 
             // Curr_Measure_TextBox
@@ -546,14 +542,14 @@ namespace ControllerPage
             // 
             // Btn_Stop
             // 
-            this.Btn_Stop.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.Btn_Stop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.Btn_Stop.BackColor = System.Drawing.Color.Red;
-            this.tableLayoutPanel1.SetColumnSpan(this.Btn_Stop, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.Btn_Stop, 4);
             this.Btn_Stop.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Stop.Location = new System.Drawing.Point(465, 212);
+            this.Btn_Stop.Location = new System.Drawing.Point(429, 204);
             this.Btn_Stop.Name = "Btn_Stop";
             this.tableLayoutPanel1.SetRowSpan(this.Btn_Stop, 3);
-            this.Btn_Stop.Size = new System.Drawing.Size(192, 84);
+            this.Btn_Stop.Size = new System.Drawing.Size(192, 96);
             this.Btn_Stop.TabIndex = 29;
             this.Btn_Stop.Text = "STOP";
             this.Btn_Stop.UseVisualStyleBackColor = false;
@@ -572,18 +568,18 @@ namespace ControllerPage
             this.textBox15.Size = new System.Drawing.Size(60, 26);
             this.textBox15.TabIndex = 24;
             this.textBox15.Text = "Average Moisture";
-            //this.textBox15.TextChanged += new System.EventHandler(this.textBox15_TextChanged);
             // 
             // label1
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.label1, 4);
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.label1.Location = new System.Drawing.Point(3, 100);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(254, 32);
             this.label1.TabIndex = 64;
             this.label1.Text = "Current Interval Moisture Measurement";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 

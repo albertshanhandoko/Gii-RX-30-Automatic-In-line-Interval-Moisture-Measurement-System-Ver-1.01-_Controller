@@ -63,11 +63,11 @@ namespace ControllerPage
             this.tableLayoutPanel1.SetColumnSpan(this.label1, 3);
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label1.Location = new System.Drawing.Point(38, 19);
+            this.label1.Location = new System.Drawing.Point(12, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(336, 37);
+            this.label1.Size = new System.Drawing.Size(388, 37);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Number interval (1-50)";
+            this.label1.Text = "Number of intervals (1-50)";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
@@ -93,7 +93,7 @@ namespace ControllerPage
             this.Combobox_NumInterval.FormattingEnabled = true;
             this.Combobox_NumInterval.IntegralHeight = false;
             this.Combobox_NumInterval.Location = new System.Drawing.Point(2, 120);
-            this.Combobox_NumInterval.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Combobox_NumInterval.Margin = new System.Windows.Forms.Padding(2);
             this.Combobox_NumInterval.Name = "Combobox_NumInterval";
             this.Combobox_NumInterval.Size = new System.Drawing.Size(408, 33);
             this.Combobox_NumInterval.TabIndex = 4;
@@ -108,7 +108,6 @@ namespace ControllerPage
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FormNumberinterval";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormNumberinterval";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

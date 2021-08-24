@@ -239,7 +239,6 @@ namespace ControllerPage
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FormNumpadBPassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormNumpad";
             this.Load += new System.EventHandler(this.FormNumpad_max_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

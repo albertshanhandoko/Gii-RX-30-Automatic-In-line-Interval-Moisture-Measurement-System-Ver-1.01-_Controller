@@ -102,7 +102,6 @@ namespace ControllerPage
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FormLanguage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormLanguage";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

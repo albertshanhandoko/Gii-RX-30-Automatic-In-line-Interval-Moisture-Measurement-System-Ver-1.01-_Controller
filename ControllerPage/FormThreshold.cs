@@ -138,5 +138,10 @@ namespace ControllerPage
         {
             this.Close();
         }
+
+        private void FormThreshold_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -59,11 +59,11 @@ namespace ControllerPage
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label1.Location = new System.Drawing.Point(37, 19);
+            this.label1.Location = new System.Drawing.Point(66, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(198, 37);
+            this.label1.Size = new System.Drawing.Size(140, 37);
             this.label1.TabIndex = 0;
-            this.label1.Text = "INTERFACE";
+            this.label1.Text = "Interface";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
@@ -99,7 +99,6 @@ namespace ControllerPage
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FormInterface";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Product Selection";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
