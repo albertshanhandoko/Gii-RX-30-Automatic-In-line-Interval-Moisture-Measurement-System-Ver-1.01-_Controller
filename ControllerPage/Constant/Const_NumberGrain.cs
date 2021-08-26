@@ -299,9 +299,9 @@ namespace ControllerPage.Constant
     {
         [Description("42096\r")]
         Paddy,
-        [Description("22094\r")]
+        [Description("A20A3\r")]
         Brown_Rice,
-        [Description("52097\r")]
+        [Description("A20A3\r")]
         Wheat,
         [Description("62098\r")]
         Barley,

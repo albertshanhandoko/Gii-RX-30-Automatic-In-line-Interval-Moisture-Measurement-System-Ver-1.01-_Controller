@@ -228,11 +228,11 @@ namespace ControllerPage
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(39, 100);
+            this.label2.Location = new System.Drawing.Point(4, 100);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 54);
+            this.label2.Size = new System.Drawing.Size(109, 54);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Brown Rice";
+            this.label2.Text = "Corn High";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
@@ -256,11 +256,11 @@ namespace ControllerPage
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(57, 176);
+            this.label3.Location = new System.Drawing.Point(10, 176);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 20);
+            this.label3.Size = new System.Drawing.Size(103, 20);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Wheat";
+            this.label3.Text = "Corn Medium";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // textBox_Bias_Paddy
@@ -391,11 +391,11 @@ namespace ControllerPage
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(386, 117);
+            this.label7.Location = new System.Drawing.Point(353, 117);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(43, 20);
+            this.label7.Size = new System.Drawing.Size(76, 20);
             this.label7.TabIndex = 18;
-            this.label7.Text = "Corn";
+            this.label7.Text = "Corn Low";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label8

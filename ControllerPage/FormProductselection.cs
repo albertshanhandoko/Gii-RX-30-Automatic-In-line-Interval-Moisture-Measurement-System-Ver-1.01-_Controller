@@ -32,14 +32,14 @@ namespace ControllerPage
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.Productselection = "Brown_Rice";
+            this.Productselection = "Corn_High";
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            this.Productselection = "Wheat";
+            this.Productselection = "Corn_Medium";
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -60,7 +60,7 @@ namespace ControllerPage
 
         private void button7_Click(object sender, EventArgs e)
         {
-            this.Productselection = "Corn";
+            this.Productselection = "Corn_Low";
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
